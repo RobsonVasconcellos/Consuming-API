@@ -6,7 +6,7 @@ const { useState } = React;
 
 const App = () => {
 
-  const [state, setState] = useState("OIOIODJIAHODIAS")
+  const [state, setState] = useState("{OIOIODJIAHODIAS}")
 
   const criarOnClick = function(campo) {
 

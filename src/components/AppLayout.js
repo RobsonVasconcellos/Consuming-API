@@ -20,9 +20,8 @@ const AppLayout = ({ children }) => {
               lineHeight="500"
               marginLeft="400"
               marginTop="300"
-              children="Eu não sei o que eu tô fazendo"
             >
-            
+              Programming Exercise
             </Text>
           </Box>
           <Layout>{children}</Layout>
