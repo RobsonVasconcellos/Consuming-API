@@ -29,6 +29,7 @@ const NavItem = ({ children, onClick, selected }) => {
         <SelectableItem href="#" onClick={handleClick}>
           {children}
         </SelectableItem>
+
       )}
     </Box>
   );

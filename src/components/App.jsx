@@ -1,17 +1,17 @@
 import React from "react";
 import AppLayout from "./AppLayout";
 import NavItem from "./NavItem";
+import { Box, Layout, Panel, Stack, Text, ThemeProvider, Select } from "@sparkpost/matchbox";
+import JSONPretty from 'react-json-pretty';
+
 
 const { useState } = React;
-
 const App = () => {
 
-  const [state, setState] = useState("{OIOIODJIAHODIAS}")
+  const [state, setState] = useState ("Select a Event to see the details.")
 
   const criarOnClick = function(campo) {
-
-    return function() {
-      console.log(campo);
+     return function() {
       fetch('/data/eventTypes.json').then(res => res.json())
         .then(res => {
           setState(JSON.stringify(res[campo]))
@@ -23,6 +23,16 @@ const App = () => {
   return (
     <AppLayout>
       <AppLayout.Left>
+        <NavItem selected>
+            <Select
+              id="id"
+              options={[
+                "message",
+                "engagement",
+                "amp"
+              ]}
+            />
+        </NavItem>
         <NavItem selected={false} onClick={criarOnClick('bounce')}>Bounce</NavItem>
         <NavItem selected={false} onClick={criarOnClick('delivery')}>Delivery</NavItem>
         <NavItem selected={false} onClick={criarOnClick('injection')}>Injection</NavItem>
@@ -43,7 +53,18 @@ const App = () => {
         <NavItem selected={false} onClick={criarOnClick('link_unsubscribe')}>Link Unsubscribe</NavItem>
         
       </AppLayout.Left>
-      <AppLayout.Right>{state}</AppLayout.Right>
+      <AppLayout.Right>
+        <Box>
+          <Text as="h2" marginLeft="8px">Evento</Text>
+          <Text truncate as="p" marginTop="100px" marginLeft="8px">
+             Remote MTA has permanently rejected a message.
+          </Text>
+          <Box p="500" bg="gray.200" borderRadius="200" color="gray.700" maxWidth="98%" marginLeft="8px"  marginTop="20px">
+          <JSONPretty id="json-pretty" data={state}></JSONPretty>
+          </Box>
+
+        </Box>
+      </AppLayout.Right>
     </AppLayout>
   );
 };
